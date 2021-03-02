@@ -1,5 +1,8 @@
 class DockingStation
-  def self.release_bike
-    'Here is your bike'
+  attr_accessor :bike
+
+  def release_bike
+    self.bike = 'Here is your bike'
   end
+
 end
