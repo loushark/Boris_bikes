@@ -1,1 +1,5 @@
-docking_station = DockingStaiton.new
+class DockingStation
+  def self.release_bike
+    'Here is your bike'
+  end
+end
