@@ -19,9 +19,11 @@ describe 'DockingStation' do
       end.to output("Here is your bike").to_stdout
 
     end
-
   end
-
+  # describe 'working?' do
+  # it 'Checks if the bike is working'
+  #   expect bike.working?.to eq "bike is working"
+  # end
 end
 
 # describe 'DockingStation' do
