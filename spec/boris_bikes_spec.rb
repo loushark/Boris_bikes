@@ -15,12 +15,16 @@ describe 'DockingStation' do
       bike = Bike.new('error')
       expect { bike.release_bike }.to raise_error(NoMethodError)
     end
+
+    it "fails if storage is empty" do
+      expect { central.release_bike }.to raise_error("No bikes available")
+    end
   end
 
   describe 'dock' do
     it "stores a bike in an instance of a docking station" do
       expect do
-        unicycle = central.release_bike('unicycle')
+        unicycle = Bike.new('unicycle')
         central.dock(unicycle)
         print central.storage[0]
       end.to output("unicycle").to_stdout
@@ -40,7 +44,7 @@ describe 'DockingStation' do
     it "returns a bike name if there is a bike in storage" do
       unicycle = Bike.new('unicycle')
       central.dock(unicycle)
-      expect(central.is_there_a_bike?).to eq("unicycle")
+      expect(central.is_there_a_bike?).to eq(true)
     end
   end
 end

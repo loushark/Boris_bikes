@@ -11,11 +11,15 @@ class DockingStation
   end
 
   def is_there_a_bike?
-    self.storage == [] ? false : self.storage[0]
+    self.storage != [] ? true : false
   end
 
-  def release_bike(name)
-    Bike.new(name)
+  def release_bike
+    if self.is_there_a_bike?
+      self.storage[0]
+    else
+      fail "No bikes available"
+    end
   end
 
 end
