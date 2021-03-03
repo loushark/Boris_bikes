@@ -8,11 +8,12 @@ describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
 
   describe 'release_bike' do
-    it 'returns a new instance of the Bike class' do
-      expect do
-        unicycle = central.release_bike('unicycle')
-        print unicycle.working?
-      end.to output("true").to_stdout
+    # it 'checks if there is a bike to be released and returns its name' do
+    #   expect { central.release_bike  }.to raise_error
+    # end
+    it "only works on instances of a DockingStation" do
+      bike = Bike.new('error')
+      expect { bike.release_bike }.to raise_error(NoMethodError)
     end
   end
 
@@ -40,6 +41,6 @@ describe 'DockingStation' do
       unicycle = Bike.new('unicycle')
       central.dock(unicycle)
       expect(central.is_there_a_bike?).to eq("unicycle")
-    end  
+    end
   end
 end
