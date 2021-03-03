@@ -1,13 +1,18 @@
 class DockingStation
-  attr_accessor :name, :storage
+  attr_accessor :name, :storage, :capacity
 
-  def initialize(name)
+  def initialize(name, storage=[], capacity=1)
     @name = name
-    @storage = []
+    @storage = storage
+    @capacity = capacity
   end
 
   def dock(bike)
-    self.storage << bike.name
+    if self.storage.length == self.capacity
+      fail "Cannot dock bike, at capacity"
+    else
+      self.storage << bike.name
+    end
   end
 
   def is_there_a_bike?

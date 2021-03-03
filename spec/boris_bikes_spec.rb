@@ -11,6 +11,9 @@ describe 'DockingStation' do
     # it 'checks if there is a bike to be released and returns its name' do
     #   expect { central.release_bike  }.to raise_error
     # end
+
+    # Guard condition - bikes aren't allowed to release bikes!
+
     it "only works on instances of a DockingStation" do
       bike = Bike.new('error')
       expect { bike.release_bike }.to raise_error(NoMethodError)
@@ -28,6 +31,15 @@ describe 'DockingStation' do
         central.dock(unicycle)
         print central.storage[0]
       end.to output("unicycle").to_stdout
+    end
+
+    # Guard condition - capacity
+
+    it "doesn't accpet more bikes when at capacity" do
+      unicycle = Bike.new('unicycle')
+      central.dock(unicycle)
+      tricycle = Bike.new('tricycle')
+      expect { central.dock(tricycle) }.to raise_error("Cannot dock bike, at capacity")
     end
   end
 
@@ -47,4 +59,8 @@ describe 'DockingStation' do
       expect(central.is_there_a_bike?).to eq(true)
     end
   end
+
+
+
+
 end
