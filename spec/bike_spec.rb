@@ -5,7 +5,9 @@ require 'boris_bikes.rb'
 # expect(obj).to respond_to(:foo).with(1).argument
 
 describe 'Bike' do
-  let(:tricycle) {Bike.new}
+  let(:tricycle) {Bike.new 'tricycle'}
+
+# it { is_expected.to respond_to(:lock, :unlock, :get_entries, :add_entry)}
 
   describe 'working?' do
     it 'checks if a bike object is working by returning true/false' do
