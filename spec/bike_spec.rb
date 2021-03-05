@@ -1,4 +1,4 @@
-require 'boris_bikes.rb'
+require 'boris_bikes'
 
 # We can use predicate matchers any time we're working with methods that end with a ?
 
@@ -14,5 +14,4 @@ describe 'Bike' do
       expect(tricycle.working?).to eq true
     end
   end
-
 end

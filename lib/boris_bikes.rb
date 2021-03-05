@@ -8,10 +8,8 @@ class DockingStation
   end
 
   def dock(bike)
-    if storage.length == capacity
-      fail "Cannot dock bike, at capacity"
-    else
       storage << bike.name
+      unless full?
     end
   end
 
@@ -26,11 +24,17 @@ class DockingStation
       fail "No bikes available"
     end
   end
+
+  def full?
+    if storage.length >= capacity
+      fail "Cannot dock bike, at capacity"
+    end
+  end
+
 end
 
-
 class Bike
-attr_accessor :name
+  attr_accessor :name
 
   def initialize(name)
     @name = name
@@ -39,5 +43,4 @@ attr_accessor :name
   def working?
     true
   end
-
 end

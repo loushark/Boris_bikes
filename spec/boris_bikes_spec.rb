@@ -1,4 +1,4 @@
-require 'boris_bikes.rb'
+require 'boris_bikes'
 
 # As a person,
 # So that I can use a bike,
@@ -6,6 +6,7 @@ require 'boris_bikes.rb'
 
 describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
+  unicycle = Bike.new('unicycle')
 
   describe 'release_bike' do
     # it 'checks if there is a bike to be released and returns its name' do
@@ -26,20 +27,15 @@ describe 'DockingStation' do
 
   describe 'dock' do
     it "stores a bike in an instance of a docking station" do
-      expect do
-        unicycle = Bike.new('unicycle')
         central.dock(unicycle)
-        print central.storage[0]
-      end.to output("unicycle").to_stdout
+      expect(central.storage[-1]).to eq("unicycle")
     end
 
     # Guard condition - capacity
 
     it "doesn't accpet more bikes when at capacity" do
-      unicycle = Bike.new('unicycle')
-      central.dock(unicycle)
-      tricycle = Bike.new('tricycle')
-      expect { central.dock(tricycle) }.to raise_error("Cannot dock bike, at capacity")
+      20.times { central.dock(Bike.new('unicycle')) }
+      expect { central.dock(Bike.new('unicycle')) }.to raise_error("Cannot dock bike, at capacity")
     end
   end
 
@@ -47,14 +43,12 @@ describe 'DockingStation' do
 
     it "checks if there is a bike in the instance variable of a docking station instance" do
       expect do
-        unicycle = Bike.new('unicycle')
         print central.is_there_a_bike?
       end.to output("false").to_stdout
     end
 
 
     it "returns a bike name if there is a bike in storage" do
-      unicycle = Bike.new('unicycle')
       central.dock(unicycle)
       expect(central.is_there_a_bike?).to eq(true)
     end
