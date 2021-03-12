@@ -19,12 +19,16 @@ class DockingStation
   end
 
   def is_there_a_bike?
-    storage != [] ? true : false
+    !empty?
+    # storage != [] ? true : false
   end
 
   def release_bike
     fail "No bikes available" if empty?
     fail "Sorry! This bike does not work!" unless storage[0].working?
+
+    " #{storage.delete(storage[0]).name} has been released"
+
   end
 
 
