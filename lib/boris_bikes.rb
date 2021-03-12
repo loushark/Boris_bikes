@@ -3,10 +3,11 @@ require_relative 'bike'
 class DockingStation
   attr_accessor :name, :storage, :capacity
 
-  def initialize(name, storage=[], capacity=20)
+  DEFAULT_CAPACITY = 20
+
+  def initialize(name, storage=[])
     @name = name
     @storage = storage
-    @capacity = capacity
   end
 
   def dock(bike)
@@ -24,8 +25,10 @@ class DockingStation
     fail "No bikes available" if empty?
   end
 
+private
+
   def full?
-    fail "Cannot dock bike, at capacity" if storage.length == capacity
+    fail "Cannot dock bike, at capacity" if storage.length == DEFAULT_CAPACITY
   end
 
   def empty?

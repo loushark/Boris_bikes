@@ -34,7 +34,7 @@ describe 'DockingStation' do
     # Guard condition - capacity
 
     it "doesn't accept more bikes when at capacity" do
-      20.times { central.dock(unicycle) }
+      DockingStation::DEFAULT_CAPACITY.times { central.dock(unicycle) }
       expect { central.dock(unicycle) }.to raise_error("Cannot dock bike, at capacity")
     end
   end
@@ -51,12 +51,6 @@ describe 'DockingStation' do
     it "returns a bike name if there is a bike in storage" do
       central.dock(unicycle)
       expect(central.is_there_a_bike?).to eq(true)
-    end
-  end
-
-  describe '#empty' do
-    it "returns true when the storage is empty" do
-      expect(central.empty?).to eq true
     end
   end
 
