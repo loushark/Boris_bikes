@@ -6,6 +6,7 @@ require 'boris_bikes'
 
 describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
+  let(:westend) { DockingStation.new 'westend', 25 }
   let(:unicycle) { instance_double( "Bike", name: "unicycle") }
 
   describe 'release_bike' do
@@ -52,6 +53,14 @@ describe 'DockingStation' do
       central.dock(unicycle)
       expect(central.is_there_a_bike?).to eq(true)
     end
+  end
+
+  it "can set a new capacity" do
+    expect(westend.capacity).to eq 25
+  end
+
+  it "has a default capacity of 20" do
+    expect(central.capacity).to eq 20
   end
 
 

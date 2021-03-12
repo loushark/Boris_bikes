@@ -5,9 +5,10 @@ class DockingStation
 
   DEFAULT_CAPACITY = 20
 
-  def initialize(name, storage=[])
+  def initialize(name, capacity = DEFAULT_CAPACITY)
     @name = name
-    @storage = storage
+    @storage = []
+    @capacity = capacity
   end
 
   def dock(bike)
