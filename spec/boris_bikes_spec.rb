@@ -7,7 +7,7 @@ require 'boris_bikes'
 describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
   let(:westend) { DockingStation.new 'westend', 25 }
-  let(:unicycle) { instance_double( "Bike", name: "unicycle") }
+  let(:unicycle) { Bike.new("unicycle") }
 
   describe 'release_bike' do
     # it 'checks if there is a bike to be released and returns its name' do
@@ -29,7 +29,7 @@ describe 'DockingStation' do
   describe 'dock' do
     it "stores a bike in an instance of a docking station" do
         central.dock(unicycle)
-      expect(central.storage[-1]).to eq("unicycle")
+      expect(central.storage[-1].name).to eq("unicycle")
     end
 
     # Guard condition - capacity
@@ -61,6 +61,12 @@ describe 'DockingStation' do
     it "has a default capacity of 20" do
       expect(central.capacity).to eq 20
     end
+  end
+
+  it "doesn't release a bike if it is broken" do
+    central.dock(unicycle)
+    unicycle.report_broken
+    expect { central.release_bike }.to raise_error "Sorry! This bike does not work!"
   end
 
 end

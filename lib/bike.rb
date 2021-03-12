@@ -1,5 +1,5 @@
 class Bike
-  attr_accessor :name, :broken
+  attr_reader :name, :broken
 
   def initialize(name)
     @name = name

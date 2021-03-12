@@ -22,8 +22,6 @@ describe 'Bike' do
 
     it "does not work if reported broken" do
       tricycle.report_broken
-      p tricycle.broken
-      p tricycle.working?
       expect(tricycle.working?).to eq false
     end
   end
