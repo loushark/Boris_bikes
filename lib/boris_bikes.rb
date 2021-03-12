@@ -26,6 +26,7 @@ class DockingStation
     fail "No bikes available" if empty?
   end
 
+
 private
 
   def full?

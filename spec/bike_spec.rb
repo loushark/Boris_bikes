@@ -14,4 +14,17 @@ describe 'Bike' do
       expect(tricycle.working?).to eq true
     end
   end
+
+  describe "#report_broken" do
+    it "can be reported as broken" do
+      expect(tricycle.report_broken).to eq true
+    end
+
+    it "does not work if reported broken" do
+      tricycle.report_broken
+      p tricycle.broken
+      p tricycle.working?
+      expect(tricycle.working?).to eq false
+    end
+  end
 end

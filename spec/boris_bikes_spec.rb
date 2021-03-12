@@ -40,28 +40,27 @@ describe 'DockingStation' do
     end
   end
 
-  describe 'is_there_a_bike?' do
+    describe 'is_there_a_bike?' do
 
-    it "checks if there is a bike in the instance variable of a docking station instance" do
-      expect do
-        print central.is_there_a_bike?
-      end.to output("false").to_stdout
+      it "checks if there is a bike in the instance variable of a docking station instance" do
+        expect do
+          print central.is_there_a_bike?
+        end.to output("false").to_stdout
+      end
+
+
+      it "returns a bike name if there is a bike in storage" do
+        central.dock(unicycle)
+        expect(central.is_there_a_bike?).to eq(true)
+      end
+
+    it "can set a new capacity" do
+      expect(westend.capacity).to eq 25
     end
 
-
-    it "returns a bike name if there is a bike in storage" do
-      central.dock(unicycle)
-      expect(central.is_there_a_bike?).to eq(true)
+    it "has a default capacity of 20" do
+      expect(central.capacity).to eq 20
     end
   end
-
-  it "can set a new capacity" do
-    expect(westend.capacity).to eq 25
-  end
-
-  it "has a default capacity of 20" do
-    expect(central.capacity).to eq 20
-  end
-
 
 end
