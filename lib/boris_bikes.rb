@@ -24,7 +24,7 @@ class DockingStation
 
   def release_bike
     fail "No bikes available" if empty?
-    fail "Sorry! This bike does not work!" if storage[0].broken
+    fail "Sorry! This bike does not work!" unless storage[0].working?
   end
 
 

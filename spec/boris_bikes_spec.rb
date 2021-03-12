@@ -1,18 +1,11 @@
 require 'boris_bikes'
 
-# As a person,
-# So that I can use a bike,
-# I'd like a docking station to release a bike.
-
 describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
   let(:westend) { DockingStation.new 'westend', 25 }
-  let(:unicycle) { Bike.new("unicycle") }
+  let(:unicycle) { double("Bike", name: 'unicycle') }
 
   describe 'release_bike' do
-    # it 'checks if there is a bike to be released and returns its name' do
-    #   expect { central.release_bike  }.to raise_error
-    # end
 
     # Guard condition - bikes aren't allowed to release bikes!
 
@@ -63,14 +56,21 @@ describe 'DockingStation' do
     end
   end
 
-  it "doesn't release a bike if it is broken" do
-    central.dock(unicycle)
-    unicycle.report_broken
-    expect { central.release_bike }.to raise_error "Sorry! This bike does not work!"
-  end
+  context 'when bike is broken' do
+    before do
+     allow(unicycle).to receive(:working?).and_return(false)
+    end
+    # let(:unicycle) { double("Bike", name: 'unicycle', working?: false) }
 
-  it "accepts bikes to dock if they are broken" do
-    unicycle.report_broken
-    expect(central.dock(unicycle)).to eq "Bike is docked successfully!"
+    it "doesn't release a bike if it is broken" do
+      central.dock(unicycle)
+      #unicycle.report_broken
+      expect { central.release_bike }.to raise_error "Sorry! This bike does not work!"
+    end
+
+    it "accepts bikes to dock if they are broken" do
+      #unicycle.report_broken
+      expect(central.dock(unicycle)).to eq "Bike is docked successfully!"
+    end
   end
 end
