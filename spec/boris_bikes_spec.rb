@@ -69,4 +69,8 @@ describe 'DockingStation' do
     expect { central.release_bike }.to raise_error "Sorry! This bike does not work!"
   end
 
+  it "accepts bikes to dock if they are broken" do
+    unicycle.report_broken
+    expect(central.dock(unicycle)).to eq "Bike is docked successfully!"
+  end
 end
