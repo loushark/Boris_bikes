@@ -1,3 +1,5 @@
+require_relative 'bike'
+
 class DockingStation
   attr_accessor :name, :storage, :capacity
 
@@ -8,8 +10,9 @@ class DockingStation
   end
 
   def dock(bike)
+    unless full?
       storage << bike.name
-      unless full?
+      "Bike is docked successfully!"
     end
   end
 
@@ -18,29 +21,15 @@ class DockingStation
   end
 
   def release_bike
-    if is_there_a_bike?
-      storage[0]
-    else
-      fail "No bikes available"
-    end
+    fail "No bikes available" if empty?
   end
 
   def full?
-    if storage.length >= capacity
-      fail "Cannot dock bike, at capacity"
-    end
+    fail "Cannot dock bike, at capacity" if storage.length == capacity
   end
 
-end
-
-class Bike
-  attr_accessor :name
-
-  def initialize(name)
-    @name = name
+  def empty?
+    storage == []
   end
 
-  def working?
-    true
-  end
 end

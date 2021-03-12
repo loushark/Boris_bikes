@@ -6,7 +6,7 @@ require 'boris_bikes'
 
 describe 'DockingStation' do
   let(:central) { DockingStation.new 'central'}
-  unicycle = Bike.new('unicycle')
+  let(:unicycle) { instance_double( "Bike", name: "unicycle") }
 
   describe 'release_bike' do
     # it 'checks if there is a bike to be released and returns its name' do
@@ -33,9 +33,9 @@ describe 'DockingStation' do
 
     # Guard condition - capacity
 
-    it "doesn't accpet more bikes when at capacity" do
-      20.times { central.dock(Bike.new('unicycle')) }
-      expect { central.dock(Bike.new('unicycle')) }.to raise_error("Cannot dock bike, at capacity")
+    it "doesn't accept more bikes when at capacity" do
+      20.times { central.dock(unicycle) }
+      expect { central.dock(unicycle) }.to raise_error("Cannot dock bike, at capacity")
     end
   end
 
@@ -54,7 +54,11 @@ describe 'DockingStation' do
     end
   end
 
-
+  describe '#empty' do
+    it "returns true when the storage is empty" do
+      expect(central.empty?).to eq true
+    end
+  end
 
 
 end

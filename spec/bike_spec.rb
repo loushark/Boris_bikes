@@ -1,4 +1,4 @@
-require 'boris_bikes'
+require 'bike'
 
 # We can use predicate matchers any time we're working with methods that end with a ?
 
